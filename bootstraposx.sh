@@ -75,7 +75,7 @@ function restore_prefs() {
   # Clone prefs repo.
   mkdir -p ${HOME}/bin
   if [[ ! -d "${HOME}/.dotfiles" ]];then
-    git clone "${DOTFILESREPO}" "${HOME}/.dotfiles"
+    ssh-agent bash -c "ssh-add ${HOME}/.ssh/id_github; git clone ${DOTFILESREPO} ${HOME}/.dotfiles"
   fi
   # fish config
   FISHCFG="${HOME}/.config/fish/config.fish"
