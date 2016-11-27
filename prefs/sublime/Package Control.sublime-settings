@@ -1,0 +1,17 @@
+{
+	"installed_packages":
+	[
+		"Package Control",
+		"SideBarEnhancements",
+		"Material Theme",
+		"GoSublime",
+		"Ginkgo Completions",
+		"Protocol Buffer Syntax",
+		"Pretty JSON",
+		"Better CoffeeScript",
+		"Handlebars",
+		"InsertDate",
+		"LESS",
+		"MarkdownEditing",
+	]
+}
