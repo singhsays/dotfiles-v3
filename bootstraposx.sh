@@ -17,6 +17,7 @@ BACKUP_ROOT="/Volumes/software"
 cat > ${TEMPDIR}/Brewfile <<BREWFILE
 cask_args appdir: '/Applications'
 tap 'caskroom/cask'
+tap 'caskroom/fonts'
 # Brew packages
 brew 'fish'
 brew 'go'
@@ -26,9 +27,9 @@ brew 'nodejs', args: ['with-npm']
 brew 'gdrive'
 brew 'mas'
 # Cask packages
-# cask 'font-consolas-for-powerline'
-# cask 'font-inconsolata-dz-for-powerline'
-# cask 'font-ubuntu-mono-powerline'
+cask 'font-consolas-for-powerline'
+cask 'font-inconsolata-dz-for-powerline'
+cask 'font-ubuntu-mono-powerline'
 cask 'git'
 cask 'google-drive'
 cask 'google-chrome'
