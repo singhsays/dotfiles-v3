@@ -71,7 +71,7 @@ function homebrew_setup() {
 function restore_prefs() {
   echo [$(date +"%d-%b-%y %H:%M:%S")] "Restoring Preferences"
   # Copy ssh keys.
-  cp -rna "${BACKUP_ROOT}/keys/*" "${HOME}/.ssh/"
+  cp -na "${BACKUP_ROOT}/keys/" "${HOME}/.ssh/"
   # Clone prefs repo.
   mkdir -p ${HOME}/bin
   if [[ ! -d "${HOME}/.dotfiles" ]];then
@@ -83,6 +83,7 @@ function restore_prefs() {
     ln -sf "${HOME}/.dotfiles/config/config.fish" "${HOME}/.config/fish/config.fish"
   fi
   # sublime text packages
+  mkdir -p "${SUBLIME_PREF_ROOT}/Packages/User"
   cp -na "${HOME}/.dotfiles/prefs/sublime/Preferences.sublime-settings" "${SUBLIME_PREF_ROOT}/Packages/User/Preferences.sublime-settings"
   cp -na "${HOME}/.dotfiles/prefs/sublime/Package Control.sublime-settings" "${SUBLIME_PREF_ROOT}/Packages/User/Package Control.sublime-settings"
   # sshconfig
