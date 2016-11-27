@@ -61,7 +61,7 @@ function homebrew_setup() {
   brew doctor >> ${LOGFILE} 2>&1
   echo [$(date +"%d-%b-%y %H:%M:%S")] "Install Homebrew packages"
   brew bundle --file="${TEMPDIR}/Brewfile" >> ${LOGFILE} 2>&1
-  echo [$(date +"%d-%b-%y %H:%M:%S")] "Running cleanup"
+  echo [$(date +"%d-%b-%y %H:%M:%S")] "Running Homebrew cleanup"
   brew cask cleanup >> ${LOGFILE} 2>&1
   brew cleanup >> ${LOGFILE} 2>&1
 }
@@ -79,18 +79,18 @@ function restore_prefs() {
     ln -sf "${HOME}/.dotfiles/config/config.fish" "${HOME}/.config/fish/config.fish"
   fi
   # sublime text packages
-  echo cp "${HOME}/.dotfiles/prefs/sublime/Preferences.sublime-settings" "${SUBLIME_PREF_ROOT}/Packages/User/Preferences.sublime-settings"
-  echo cp "${HOME}/.dotfiles/prefs/sublime/Package Control.sublime-settings" "${SUBLIME_PREF_ROOT}/Packages/User/Package Control.sublime-settings"
+  cp -na "${HOME}/.dotfiles/prefs/sublime/Preferences.sublime-settings" "${SUBLIME_PREF_ROOT}/Packages/User/Preferences.sublime-settings"
+  cp -na "${HOME}/.dotfiles/prefs/sublime/Package Control.sublime-settings" "${SUBLIME_PREF_ROOT}/Packages/User/Package Control.sublime-settings"
   # sshconfig
-  cp "${HOME}/.dotfiles/config/ssh.config" "${HOME}/.ssh/config"
+  cp -na "${HOME}/.dotfiles/config/ssh.config" "${HOME}/.ssh/config"
   # sublime text license
   SUBL_LICENSE="$(find_gdrive 'License.sublime_license')"
-  if [[ ! -z SUBL_LICENSE ]];then
+  if [[ ! -z "${SUBL_LICENSE}" ]];then
     gdrive download --path "${SUBLIME_PREF_ROOT}/Local/" ${SUBL_LICENSE}
   fi
   # sourcetree license
   SRCTREE_LICENSE="$(find_gdrive 'sourcetree.license')"
-  if [[ ! -z SOURCETREE_LICENSE ]];then
+  if [[ ! -z "${SOURCETREE_LICENSE}" ]];then
     gdrive download --path "${SRCTREE_ROOT}/" ${SRCTREE_LICENSE}
   fi
 }
