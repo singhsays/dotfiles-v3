@@ -11,7 +11,7 @@ TEMPDIR=$(mktemp -d)
 DOTFILESREPO="git@github.com:singhsays/dotfiles-v3.git"
 SUBLIME_PREF_ROOT="${HOME}/Library/Application Support/Sublime Text 3"
 SRCTREE_ROOT="${HOME}/Library/Application Support/SourceTree"
-XCODE_ARCHIVE="/Volumes/software/osx/xcode.tar.xz"
+BACKUP_ROOT="/Volumes/software"
 
 # Inline Brewfile so that we can pipe this script direct to shell.
 cat > ${TEMPDIR}/Brewfile <<BREWFILE
@@ -70,6 +70,9 @@ function homebrew_setup() {
 # Restore Preferences
 function restore_prefs() {
   echo [$(date +"%d-%b-%y %H:%M:%S")] "Restoring Preferences"
+  # Copy ssh keys.
+  cp -rna "${BACKUP_ROOT}/keys/*" "${HOME}/.ssh/"
+  # Clone prefs repo.
   mkdir -p ${HOME}/bin
   if [[ ! -d "${HOME}/.dotfiles" ]];then
     git clone "${DOTFILESREPO}" "${HOME}/.dotfiles"
@@ -156,13 +159,14 @@ function restart_services() {
 echo [$(date +"%d-%b-%y %H:%M:%S")] "Bootstrapping OS X"
 
 # Mount the local NAS backup share.
-# TODO(sumeets): This may not be needed since this is now synced
-# to google drive. May need it for xcode which is too big for
-# google drive storage.
-# mount | grep -q shelby/documents
-# if [[ "$?" -ne 0 ]];then
-#   osascript -e 'mount volume "cifs://shelby/documents"'
-# fi
+mount | grep -q shelby/software
+if [[ "$?" -ne 0 ]];then
+  osascript -e 'mount volume "cifs://shelby/software"'
+fi
+mount | grep -q shelby/software
+if [[ "$?" -ne 0 ]];then
+  echo [$(date +"%d-%b-%y %H:%M:%S")] "Failed to mount backup share, aborting ..." 
+fi
 
 # Ask for the administrator password upfront
 sudo -v
