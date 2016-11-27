@@ -23,6 +23,7 @@ brew 'go'
 brew 'mongodb', restart_service: :changed
 brew 'p7zip'
 brew 'nodejs', args: ['with-npm']
+brew 'gdrive'
 brew 'mas'
 # Cask packages
 cask 'font-consolas-for-powerline'
