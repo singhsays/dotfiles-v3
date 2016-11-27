@@ -73,11 +73,12 @@ function restore_prefs() {
   # Copy ssh keys.
   cp -na "${BACKUP_ROOT}/keys/" "${HOME}/.ssh/"
   # Clone prefs repo.
-  mkdir -p ${HOME}/bin
+  mkdir -p "${HOME}/bin"
   if [[ ! -d "${HOME}/.dotfiles" ]];then
     ssh-agent bash -c "ssh-add ${HOME}/.ssh/id_github; git clone ${DOTFILESREPO} ${HOME}/.dotfiles"
   fi
   # fish config
+  mkdir -p "${HOME}/.config/fish"
   FISHCFG="${HOME}/.config/fish/config.fish"
   if [[ ! -e "{$FISHCFG}" ]];then
     ln -sf "${HOME}/.dotfiles/config/config.fish" "${HOME}/.config/fish/config.fish"
@@ -146,7 +147,7 @@ function tweak_settings() {
   defaults write com.apple.finder WarnOnEmptyTrash -bool false
   defaults write com.apple.dock showhidden -bool true
   # Show the ~/Library folder
-  chflags nohidden ~/Library
+  chflags nohidden "${HOME}/Library"
 }
 
 function restart_services() {
