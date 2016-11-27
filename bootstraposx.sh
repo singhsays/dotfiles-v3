@@ -26,9 +26,9 @@ brew 'nodejs', args: ['with-npm']
 brew 'gdrive'
 brew 'mas'
 # Cask packages
-cask 'font-consolas-for-powerline'
-cask 'font-inconsolata-dz-for-powerline'
-cask 'font-ubuntu-mono-powerline'
+# cask 'font-consolas-for-powerline'
+# cask 'font-inconsolata-dz-for-powerline'
+# cask 'font-ubuntu-mono-powerline'
 cask 'git'
 cask 'google-drive'
 cask 'google-chrome'
